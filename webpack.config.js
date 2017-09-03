@@ -13,7 +13,20 @@ const config = {
         modules: ["deps", "node_modules"]
     },
     module: {
+        exprContextCritical: false,
         rules: [
+            {
+                test: /\.jsx?$/,
+                use: "babel-loader"
+            },
+            {
+                test: /\.tsx?$/,
+                exclude: [resolve(__dirname, 'node_modules')],
+                use: [
+                  { loader: 'babel-loader' },
+                  { loader: 'ts-loader' },
+                ],
+            },
             {
                 test: /\.css$/,
                 use: ExtractTextPlugin.extract({
